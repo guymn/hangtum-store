@@ -49,11 +49,6 @@ public class VideoControllerService {
         videoRepository.save(video);
     }
 
-    public void mapperVideo(VideoDTO videoDTO, Video video) {
-        serverMapper.updateVideoFromDto(videoDTO, video);
-        saveVideo(video);
-    }
-
     public void deleteVideo(Long id) {
         videoRepository.deleteById(id);
     }

@@ -49,11 +49,6 @@ public class NoteControllerService {
         noteRepository.save(note);
     }
 
-    public void mapperNote(NoteDTO noteDTO, Note note) {
-        serverMapper.updateNoteFromDto(noteDTO, note);
-        saveNote(note);
-    }
-
     public void deleteNote(Long id) {
         noteRepository.deleteById(id);
     }

@@ -6,23 +6,23 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CartApplication",
+            "request": "launch",
+            "mainClass": "hangtum.store.cart.CartApplication",
+            "projectName": "hangtum-cart"
+        },
+        {
+            "type": "java",
+            "name": "ItemApp",
+            "request": "launch",
+            "mainClass": "hangtum.store.item.ItemApp",
+            "projectName": "hangtum-item"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "MongCourseApplication",
-            "request": "launch",
-            "mainClass": "spring.edu.mongcourse.MongCourseApplication",
-            "projectName": "mong-course"
-        },
-        {
-            "type": "java",
-            "name": "MongLessonApplication",
-            "request": "launch",
-            "mainClass": "spring.edu.monglesson.MongLessonApplication",
-            "projectName": "mong-lesson"
         },
         {
             "type": "java",
