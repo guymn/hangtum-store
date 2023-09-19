@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hangtum.store.item.model.Category;
-import hangtum.store.item.model.CategoryDTO;
 import hangtum.store.item.service.CategotyControllerService;
 
 @RestController
@@ -60,16 +58,6 @@ public class CategoryController {
         category.setId(id);
         categotyControllerService.saveCategory(category);
         return ResponseEntity.ok("Category was updated");
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<String> patchCategory(@PathVariable Long id, @RequestBody CategoryDTO categoryDTO) {
-        Optional<Category> optCategory = categotyControllerService.getCategoryById(id);
-        if (!optCategory.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Category not found");
-        }
-        categotyControllerService.mapperCategory(categoryDTO, optCategory.get());
-        return ResponseEntity.ok("Category patched.");
     }
 
     @DeleteMapping("/{id}")

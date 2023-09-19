@@ -8,24 +8,20 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import hangtum.store.cart.ServerMapper;
 import hangtum.store.cart.model.Note;
-import hangtum.store.cart.model.NoteDTO;
 import hangtum.store.cart.repository.NoteRepository;
 
 @Service
 public class NoteControllerService {
     private final NoteRepository noteRepository;
-    private ServerMapper serverMapper;
     LessonControllerService lessonControllerService;
 
     Logger LOG = LoggerFactory.getLogger(NoteControllerService.class);
 
     @Autowired
-    public NoteControllerService(NoteRepository noteRepository, ServerMapper serverMapper,
+    public NoteControllerService(NoteRepository noteRepository,
             LessonControllerService lessonControllerService) {
         this.noteRepository = noteRepository;
-        this.serverMapper = serverMapper;
         this.lessonControllerService = lessonControllerService;
     }
 
@@ -45,7 +41,8 @@ public class NoteControllerService {
     }
 
     public void saveNote(Note note) {
-        if (note.getLessonID() == null || !lessonControllerService.getLessonById(Long.parseLong(note.getLessonID())).isPresent()) {
+        if (note.getLessonID() == null
+                || !lessonControllerService.getLessonById(Long.parseLong(note.getLessonID())).isPresent()) {
             LOG.info("Can not save. Nust have LessonID");
             return;
         }

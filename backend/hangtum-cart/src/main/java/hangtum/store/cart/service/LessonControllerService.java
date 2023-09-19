@@ -6,21 +6,16 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import hangtum.store.cart.ServerMapper;
 import hangtum.store.cart.model.Lesson;
-import hangtum.store.cart.model.LessonDTO;
 import hangtum.store.cart.repository.LessonRepository;
 
 @Service
 public class LessonControllerService {
     private final LessonRepository lessonRepository;
-    private ServerMapper serverMapper;
 
     @Autowired
-    public LessonControllerService(LessonRepository lessonRepository,
-            ServerMapper serverMapper) {
+    public LessonControllerService(LessonRepository lessonRepository) {
         this.lessonRepository = lessonRepository;
-        this.serverMapper = serverMapper;
     }
 
     public List<Lesson> getAllLesson() {
@@ -40,11 +35,6 @@ public class LessonControllerService {
 
     public void saveLesson(Lesson lesson) {
         lessonRepository.save(lesson);
-    }
-
-    public void mapperLesson(LessonDTO lessonDTO, Lesson lesson) {
-        serverMapper.updateLessonFromDto(lessonDTO, lesson);
-        saveLesson(lesson);
     }
 
     public void deleteLesson(Long id) {

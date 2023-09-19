@@ -6,24 +6,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import hangtum.store.item.ServerMapper;
 import hangtum.store.item.kafka.KafkaService;
 import hangtum.store.item.model.Course;
-import hangtum.store.item.model.CourseDTO;
 import hangtum.store.item.repository.CourseRepository;
 
 @Service
 public class CourseControllerService {
     private final CourseRepository courseRepository;
     private final KafkaService kafkaService;
-    private final ServerMapper serverMapper;
 
     @Autowired
-    public CourseControllerService(CourseRepository courseRepository, KafkaService kafkaService,
-            ServerMapper serverMapper) {
+    public CourseControllerService(CourseRepository courseRepository, KafkaService kafkaService) {
         this.courseRepository = courseRepository;
         this.kafkaService = kafkaService;
-        this.serverMapper = serverMapper;
     }
 
     public List<Course> getAllCourse() {
@@ -63,7 +58,7 @@ public class CourseControllerService {
         courseRepository.deleteAll();
     }
 
-    public void sendIdToLesson(Long courseID){
+    public void sendIdToLesson(Long courseID) {
         kafkaService.sendCourseIdToLesson(courseID);
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hangtum.store.cart.model.Video;
-import hangtum.store.cart.model.VideoDTO;
 import hangtum.store.cart.service.VideoControllerService;
 
 @RestController
@@ -66,16 +64,6 @@ public class VideoController {
         video.setId(id);
         videoControllerService.saveVideo(video);
         return ResponseEntity.ok("Video was updated");
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<String> patchVideo(@PathVariable Long id, @RequestBody VideoDTO videoDTO) {
-        Optional<Video> optVideo = videoControllerService.getVideoById(id);
-        if (!optVideo.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Video not found");
-        }
-        videoControllerService.mapperVideo(videoDTO, optVideo.get());
-        return ResponseEntity.ok("Video patched.");
     }
 
     @DeleteMapping("/{id}")

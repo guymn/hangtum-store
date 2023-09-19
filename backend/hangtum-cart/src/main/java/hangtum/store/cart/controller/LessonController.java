@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import hangtum.store.cart.model.Lesson;
-import hangtum.store.cart.model.LessonDTO;
 import hangtum.store.cart.service.LessonControllerService;
 
 @RestController
@@ -66,16 +64,6 @@ public class LessonController {
         lesson.setId(id);
         lessonControllerService.saveLesson(lesson);
         return ResponseEntity.ok("Lesson was updated");
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<String> patchLesson(@PathVariable Long id, @RequestBody LessonDTO lessonDTO) {
-        Optional<Lesson> optLesson = lessonControllerService.getLessonById(id);
-        if (!optLesson.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Lesson not found");
-        }
-        lessonControllerService.mapperLesson(lessonDTO, optLesson.get());
-        return ResponseEntity.ok("Lesson patched.");
     }
 
     @DeleteMapping("/{id}")
